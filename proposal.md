@@ -1,4 +1,4 @@
-# CS4241 Group 25 Final Project Proposal
+# CS4241 Group 28 Final Project Proposal
 5 October 2020
 
 __Group Members:__ Haley Hauptfeld, Ann Jicha, Matthew St. Louis
