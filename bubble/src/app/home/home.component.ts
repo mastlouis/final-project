@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
 
   audio: any = null;
   video: any = null;
+  mirror = true;
 
   constructor(private _rtc: RtcService) { }
 
