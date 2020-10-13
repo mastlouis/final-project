@@ -34,6 +34,38 @@ export class RtcService {
     });
   }
 
+  connectSelfVideo() {
+    navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    }).then((stream) => {
+      this.self.peer.addStream(stream);
+      this.self.video = stream;
+    }).catch(err => {
+      console.error(`Error connecting media: ${err}`);
+    });
+  }
+
+  connectSelfAudio() {
+    navigator.mediaDevices.getUserMedia({
+      video: false,
+      audio: true
+    }).then((stream) => {
+      this.self.peer.addStream(stream);
+      this.self.audio = stream;
+    }).catch(err => {
+      console.error(`Error connecting media: ${err}`);
+    });
+  }
+
+  removeSelfAudio() {
+    this.self.peer.removeStream(this.self.audio);
+  }
+
+  removeSelfVideo() {
+    this.self.peer.removeStream(this.self.video);
+  }
+
   getPeerVideo(i: number) {
     this.clients[i].peer.on('stream', stream => {
       this.clients[i].video = stream;

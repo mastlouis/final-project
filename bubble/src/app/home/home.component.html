@@ -1,7 +1,14 @@
 <p>Welcome to Bubble! I needed a working title to create the project, and we can rename it if anyone has a preference.</p>
+
+<h2>Your Video</h2>
 <button mat-mini-fab (click)="toggleAudio()">
   <mat-icon>{{audio? 'mic_off' : 'mic'}}</mat-icon>
 </button>
 <button mat-mini-fab (click)="toggleVideo()">
   <mat-icon>{{video? 'videocam_off' : 'videocam'}}</mat-icon>
 </button>
+<br>
+<video id="your-video"></video>
+
+<h2>Other People's Videos</h2>
+
