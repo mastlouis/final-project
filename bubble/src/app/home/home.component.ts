@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RtcService } from '../services/rtc.service';
 
 @Component({
   selector: 'bbl-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _rtc: RtcService) { }
 
   ngOnInit(): void {
   }
