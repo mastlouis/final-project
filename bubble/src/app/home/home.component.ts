@@ -8,9 +8,23 @@ import { RtcService } from '../services/rtc.service';
 })
 export class HomeComponent implements OnInit {
 
+  audio = false;
+  video = false;
+
   constructor(private _rtc: RtcService) { }
 
   ngOnInit(): void {
+  }
+
+  toggleAudio() {
+    this.audio = !this.audio;
+    this._rtc.connectSelf(this.audio, this.video);
+
+  }
+
+  toggleVideo() {
+    this.video = !this.video;
+    this._rtc.connectSelf(this.audio, this.video);
   }
 
 }
