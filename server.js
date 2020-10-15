@@ -18,6 +18,8 @@ client.connect(err => {
 app.use(express.static(path.join(__dirname, "bubble/dist/bubble")));
 
 /*start of changes*/
+const ws = require('ws');
+const http = require('http');
 const server = http.createServer( app )
 
 const socketServer = new ws.Server({ server })
