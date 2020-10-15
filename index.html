@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <style>
+      body {
+        margin:0;
+        background:black
+      }
+    </style> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.7.2/simplepeer.min.js"></script>
+  </head>
+  
+  <body>
+    <video></video>
+
+    <script>
+      window.onload = function() {
+        let rtcConnected = false,
+            Peer = SimplePeer,
+            p = null;
+
+        const socketReady = new Promise( (resolve, reject) => {
+          ws = new WebSocket(`wss://${window.location.host}`);
+
+          ws.onopen = () => {
+
+            ws.onmessage = __msg => {
+              const msg = JSON.parse( __msg.data )
+              if( msg.address === 'connect' )  {
+                resolve( msg.initiator )
+              }else{
+                p.signal( msg );
+              }
+            };
+          };
+        });
+
+        // get video/voice stream as Promise
+        const avReady = navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true
+        });
+
+        const makeConnection = function(initiator) {
+          console.log("making connection");
+          ws.send( initiator );
+        };
+
+        Promise.all( [avReady, socketReady] ).then( values => {
+          const stream = values[0];
+
+          p = new Peer({
+            initiator: values[1],
+            trickle: false,
+            stream
+          });
+
+          p.on("signal", data => {
+            makeConnection( JSON.stringify(data) );
+          });
+
+          p.on("stream", stream => {
+            // got remote video stream, now let's show it in a video tag
+            var video = document.querySelector("video");
+
+            if ("srcObject" in video) {
+              video.srcObject = stream;
+            } else {
+              video.src = window.URL.createObjectURL(stream);
+            }
+
+            video.play()
+          })
+        })
+
+        // end window.onload
+      }
+    </script>
+  </body>
+</html>
