@@ -1,15 +1,37 @@
 <p>Welcome to Bubble! I needed a working title to create the project, and we can rename it if anyone has a preference.</p>
 
-<h2>Your Video</h2>
-<button mat-mini-fab (click)="toggleAudio()">
-  <mat-icon>{{audio? 'mic_off' : 'mic'}}</mat-icon>
+<button mat-button (click)=addTile()>
+  <mat-icon>add</mat-icon>
 </button>
-<button mat-mini-fab (click)="toggleVideo()">
-  <mat-icon>{{video? 'videocam_off' : 'videocam'}}</mat-icon>
-</button>
-<mat-slide-toggle [checked]="mirror">Mirror my video</mat-slide-toggle>
-<br>
-<video id="your-video" [ngClass]="{'mirror' : mirror}"></video>
+<mat-grid-list [cols]="numCols">
+  <mat-grid-tile *ngFor="let tile of tiles; let i = index"
+    [colspan]="tile.cols"
+    [rowspan]="tile.rows"
+    [style.background]="tile.color">
+    <br>
+    <div *ngIf="tile.index === 0">
+      <video class="your-video" [ngClass]="{'mirror' : mirror}"></video>
+    </div>
+    <mat-grid-tile-footer>
+      <p>{{tile.text}}</p>
+      <button *ngIf="tile.cols === 1" mat-button (click)="refocus(tile.index)">
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+      <button *ngIf="tile.cols !== 1" mat-button (click)="unfocus()">
+        <mat-icon>fullscreen_exit</mat-icon>
+      </button>
 
-<h2>Other People's Videos</h2>
-
+      <!-- You -->
+      <div *ngIf="tile.index === 0">
+        <button mat-button (click)="toggleAudio()">
+          <mat-icon>{{audio? 'mic_off' : 'mic'}}</mat-icon>
+        </button>
+        <button mat-button (click)="toggleVideo()">
+          <mat-icon>{{video? 'videocam_off' : 'videocam'}}</mat-icon>
+        </button>
+        <!-- <mat-slide-toggle [checked]="mirror">Mirror</mat-slide-toggle> -->
+      </div>
+      <!-- End You -->
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list>
