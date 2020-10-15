@@ -25,7 +25,7 @@ export class RtcService {
 
   constructor() {
     this.self = new PeerData( new SimplePeer({initiator: true}) );
-    this.test();
+    // this.test();
   }
 
   addPeer() {
@@ -107,7 +107,7 @@ export class RtcService {
     });
   }
 
-  test() {
+  testPeer() {
     this.addPeer();
 
     this.self.peer.on('connect', () => {

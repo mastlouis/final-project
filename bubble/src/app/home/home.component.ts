@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RtcService } from '../services/rtc.service';
+import { WebsocketService } from "../websocket.service";
+import { ChatService } from "../chat.service";
 
 @Component({
   selector: 'bbl-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [WebsocketService, ChatService]
 })
 export class HomeComponent implements OnInit {
 
@@ -12,9 +15,24 @@ export class HomeComponent implements OnInit {
   video: any = null;
   mirror = true;
 
-  constructor(private _rtc: RtcService) { }
+  constructor(private _rtc: RtcService, private chatService: ChatService) { 
+    chatService.messages.subscribe(msg => {
+      console.log("Response from websocket: " + msg);
+    });
+  }
 
   ngOnInit(): void {
+
+  }
+  private message = {
+    author: "tutorialedge",
+    message: "this is a test message"
+  };
+
+  sendMsg() {
+    console.log("new message from client to websocket: ", this.message);
+    this.chatService.messages.next(this.message);
+    this.message.message = "";
   }
 
   toggleAudio() {
@@ -45,4 +63,26 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
+  toggleVideo2() {
+    if(this.video) {
+      this._rtc.removeSelfVideo();
+      this.video = null;
+      let pageVideo = document.querySelector("#your-video") as HTMLVideoElement;
+      pageVideo.srcObject = null;
+      pageVideo.play()
+    }
+    else {
+      this._rtc.connectSelfVideo();
+      this.video = this._rtc.self.video;
+      let pageVideo = document.querySelector("#your-video") as HTMLVideoElement;
+      pageVideo.srcObject = this.video;
+      pageVideo.play()
+    }
+  }
+
+  tester(){
+      this._rtc.testPeer();
+      console.log("we sure tried");
+  }
 }

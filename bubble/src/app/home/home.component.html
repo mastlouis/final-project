@@ -12,4 +12,8 @@
 <video id="your-video" [ngClass]="{'mirror' : mirror}"></video>
 
 <h2>Other People's Videos</h2>
+<button mat-mini-fab (click)="sendMsg()">
+  <mat-icon>{{video? 'videocam_off' : 'videocam'}}</mat-icon>
+</button>
+<video id="other-video"></video>
 
