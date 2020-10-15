@@ -1,8 +1,36 @@
 <p>Welcome to Bubble! I needed a working title to create the project, and we can rename it if anyone has a preference.</p>
 
-<button mat-button (click)=addTile()>
-  <mat-icon>add</mat-icon>
-</button>
+<h2>Bubbles</h2>
+<mat-chip-list
+  class="example-chip"
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="drop($event)">
+  <mat-chip
+    class="example-box"
+    cdkDrag
+    *ngFor="let bubble of bubbles"
+    (click)="addBubble(bubble.name)">
+    {{bubble.name}}
+  </mat-chip>
+</mat-chip-list>
+
+<form [formGroup]="newBubbleForm">
+  <mat-form-field>
+    <mat-label>New Bubble</mat-label>
+    <input matNativeControl matInput formControlName="newBubble"/>
+  </mat-form-field>
+  <button mat-button (click)="addBubble()" [disabled]="!newBubbleForm.get('newBubble').value">
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+
+<h2>
+  Videos
+  <button mat-button (click)=addTile()>
+    <mat-icon>add</mat-icon>
+  </button>
+</h2>
 <mat-grid-list [cols]="numCols">
   <mat-grid-tile *ngFor="let tile of tiles; let i = index"
     [colspan]="tile.cols"

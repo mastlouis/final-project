@@ -1,6 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RtcService } from '../services/rtc.service';
 import { Tile } from '../model/Tile.model';
+import { Bubble } from '../model/Bubble.model';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'bbl-home',
@@ -14,6 +17,11 @@ export class HomeComponent implements OnInit {
   mirror = true;
   focus: number = null;
   numCols = 1;
+  bubbles: Bubble[] = [
+    {name: 'one'},
+    {name: 'two'},
+    {name: 'three'},
+  ]
   you: Tile = {text: 'You', cols: 1, rows: 1, color: 'lightblue', index: 0};
   tiles: Tile[] = [
     this.you,
@@ -22,8 +30,11 @@ export class HomeComponent implements OnInit {
     {text: '3', cols: 1, rows: 1, color: 'lightpink', index: 3},
     {text: '4', cols: 1, rows: 1, color: 'lavender', index: 4},
   ]
+  newBubbleForm = this._fb.group({
+    newBubble: [''],
+  });
 
-  constructor(private _rtc: RtcService) { }
+  constructor(private _rtc: RtcService, private _fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.numCols = Math.floor(window.innerWidth / 320);
@@ -33,6 +44,10 @@ export class HomeComponent implements OnInit {
   onResize(event) {
     this.numCols = Math.floor(event.target.innerWidth / 320);
     this.tiles[0].cols = this.numCols;
+  }
+
+  drop(event: CdkDragDrop<Bubble[]>) {
+    moveItemInArray(this.bubbles, event.previousIndex, event.currentIndex);
   }
 
   toggleAudio() {
@@ -90,6 +105,19 @@ export class HomeComponent implements OnInit {
     this.tiles[0].rows = 1;
     this.tiles.splice(this.focus, 0, this.tiles.splice(0, 1)[0]);
     this.focus = null;
+  }
+
+  addBubble(name: string = "") {
+    if(!name) {
+      if (!this.newBubbleForm.get("newBubble")){
+        return;
+      }
+      name = this.newBubbleForm.get("newBubble").value;
+    }
+    this.bubbles.push({
+      name: name
+    } as Bubble);
+    this.newBubbleForm.get("newBubble").setValue('');
   }
 
 }
