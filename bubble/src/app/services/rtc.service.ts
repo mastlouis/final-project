@@ -2,6 +2,20 @@ import { Injectable } from '@angular/core';
 import defaultExport, * as SimplePeer from 'node_modules/simple-peer/simplepeer.min.js';
 import { PeerData } from '../model/PeerData.model';
 
+/* START OF WEB SOCKET CHANGES */
+// import * as http from 'http';
+import * as WebSocket from 'ws';
+// import * as Exp from 'express'
+
+// const app = Exp.express();
+
+// const server = http.createServer( app )
+
+// const socketServer = new WebSocket.Server({ server })
+
+// // create a list of clients
+// const clients = []
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +38,27 @@ export class RtcService {
     });
     this.clients.push(new PeerData(newPeer));
   }
+
+  // connectOther(){
+
+  //   let rtcConnected = false, Peer = SimplePeer, p = null;
+
+  //       const socketReady = new Promise( (resolve, reject) => {
+  //         let sock = new WebSocket(`wss://${window.location.host}`);
+
+  //         sock.onopen = () => {
+
+  //           sock.onmessage = __msg => {
+  //             const msg = JSON.parse( __msg.data )
+  //             if( msg.address === 'connect' )  {
+  //               resolve( msg.initiator )
+  //             }else{
+  //               p.signal( msg );
+  //             }
+  //           };
+  //         };
+  //       });
+  // }
 
   connectSelf(audio: boolean, video: boolean) {
     navigator.mediaDevices.getUserMedia({
