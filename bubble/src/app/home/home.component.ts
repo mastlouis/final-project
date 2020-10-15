@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RtcService } from '../services/rtc.service';
+import { Rtc2Service } from '../services/rtc2.service';
 import { Tile } from '../model/Tile.model';
 import { Bubble } from '../model/Bubble.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -34,7 +35,11 @@ export class HomeComponent implements OnInit {
     newBubble: [''],
   });
 
-  constructor(private _rtc: RtcService, private _fb: FormBuilder) { }
+  constructor(
+    private _rtc: RtcService,
+    private _fb: FormBuilder,
+    private _rtc2: Rtc2Service,
+  ) { }
 
   ngOnInit(): void {
     this.numCols = Math.floor(window.innerWidth / 320);
@@ -118,6 +123,13 @@ export class HomeComponent implements OnInit {
       name: name
     } as Bubble);
     this.newBubbleForm.get("newBubble").setValue('');
+  }
+
+  activateRTC() {
+    this.video = this._rtc2.self.video;
+    let pageVideo = document.querySelector(".your-video") as HTMLVideoElement;
+    pageVideo.srcObject = this.video;
+    pageVideo.play()
   }
 
 }
