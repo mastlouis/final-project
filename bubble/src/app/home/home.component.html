@@ -4,7 +4,7 @@
 <button mat-mini-fab (click)="toggleAudio()">
   <mat-icon>{{audio? 'mic_off' : 'mic'}}</mat-icon>
 </button>
-<button mat-mini-fab (click)="toggleVideo()">
+<button mat-mini-fab (click)="toggleVideo()" (click)="startPage()">
   <mat-icon>{{video? 'videocam_off' : 'videocam'}}</mat-icon>
 </button>
 <mat-slide-toggle [checked]="mirror">Mirror my video</mat-slide-toggle>
@@ -15,4 +15,4 @@
 <button mat-mini-fab (click)="startPage()">
   <mat-icon>{{video? 'videocam_off' : 'videocam'}}</mat-icon>
 </button>
-<video id="their-video" [ngClass]="{'mirror' : mirror}"></video>
+<video id="their-video"></video>
