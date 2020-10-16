@@ -21,17 +21,17 @@ export class HomeComponent implements OnInit {
   focus: number = null;
   numCols = 1;
   bubbles: Bubble[] = [
-    {name: 'one'},
-    {name: 'two'},
-    {name: 'three'},
+    { name: 'one' },
+    { name: 'two' },
+    { name: 'three' },
   ]
-  you: Tile = {text: 'You', cols: 1, rows: 1, color: 'lightblue', index: 0};
+  you: Tile = { text: 'You', cols: 1, rows: 1, color: 'lightblue', index: 0 };
   tiles: Tile[] = [
     this.you,
-    {text: '1', cols: 1, rows: 1, color: 'lightblue', index: 1},
-    {text: '2', cols: 1, rows: 1, color: 'lightgreen', index: 2},
-    {text: '3', cols: 1, rows: 1, color: 'lightpink', index: 3},
-    {text: '4', cols: 1, rows: 1, color: 'lavender', index: 4},
+    { text: '1', cols: 1, rows: 1, color: 'lightblue', index: 1 },
+    { text: '2', cols: 1, rows: 1, color: 'lightgreen', index: 2 },
+    { text: '3', cols: 1, rows: 1, color: 'lightpink', index: 3 },
+    { text: '4', cols: 1, rows: 1, color: 'lavender', index: 4 },
   ]
   newBubbleForm = this._fb.group({
     newBubble: [''],
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleAudio() {
-    if(this.audio) {
+    if (this.audio) {
       this._rtc.removeSelfAudio();
       this.audio = null;
     }
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleVideo() {
-    if(this.video) {
+    if (this.video) {
       this._rtc.removeSelfVideo();
       this.video = null;
       let pageVideo = document.querySelector(".your-video") as HTMLVideoElement;
@@ -116,8 +116,8 @@ export class HomeComponent implements OnInit {
   }
 
   addBubble(name: string = "") {
-    if(!name) {
-      if (!this.newBubbleForm.get("newBubble")){
+    if (!name) {
+      if (!this.newBubbleForm.get("newBubble")) {
         return;
       }
       name = this.newBubbleForm.get("newBubble").value;
@@ -134,16 +134,16 @@ export class HomeComponent implements OnInit {
     pageVideo.srcObject = this.video;
     pageVideo.play()
     for (let i = 0; i < this._rtc2.clients.length; i++) {
-      if (this.tiles.length + 1 < this._rtc2.clients.length){
-        this.tiles.push({text: `${i}`, cols: 1, rows: 1, color: 'lightblue', index: i} as Tile);
+      if (this.tiles.length + 1 < this._rtc2.clients.length) {
+        this.tiles.push({ text: `${i}`, cols: 1, rows: 1, color: 'lightblue', index: i } as Tile);
       }
       this.tiles[i + 1].stream = this._rtc2.clients[i].video;
-      let clientVideo = document.querySelector(`.client-${i+1}-video`) as HTMLVideoElement
+      let clientVideo = document.querySelector(`.client-${i + 1}-video`) as HTMLVideoElement
       clientVideo.srcObject = this._rtc2.clients[i].video;
       clientVideo.play();
     }
   }
-  
+
   debug() {
     debugger;
   }
@@ -155,16 +155,211 @@ export class HomeComponent implements OnInit {
 
 
 
+}
 
+//stuff that Haley tried to add from client.js file of acidtango tutorial... getting two big errors with trying to convert js to ts
 
+function justDoIt() {
   // DOM elements.
-const roomSelectionContainer = document.getElementById('room-selection-container')
+  const roomSelectionContainer = document.getElementById('room-selection-container')
+  const roomInput = document.getElementById('room-input')
+
+  const videoChatContainer = document.getElementById('video-chat-container')
+  const localVideoComponent = document.getElementById('local-video')
+  const remoteVideoComponent = document.getElementById('remote-video')
+
+  // Variables.
+  const mediaConstraints = {
+    audio: true,
+    video: { width: 1280, height: 720 },
+  }
+
+
+  //ERROR 1: when these 5 variables are referenced, an error pops up saying object is possibly undefined and I haven't found a way to debug it yet
+  var localStream = null;
+  var remoteStream = null;
+  var isRoomCreator = false;
+  var rtcPeerConnection = null; // Connection between the local device and the remote peer.
+  var roomId = 1;
+
+  // Free public STUN servers provided by Google.
+  const iceServers = {
+    iceServers: [
+      { urls: 'stun:stun.l.google.com:19302' },
+      { urls: 'stun:stun1.l.google.com:19302' },
+      { urls: 'stun:stun2.l.google.com:19302' },
+      { urls: 'stun:stun3.l.google.com:19302' },
+      { urls: 'stun:stun4.l.google.com:19302' },
+    ],
+  }
+
+  // BUTTON LISTENER ============================================================
+  function connectButton() {
+    joinRoom(this.roomInput)
+  }
+
+  // SOCKET EVENT CALLBACKS =====================================================
+
+
+  //ERROR 2: whenever the first instance of Socket.on is called, an identifier is expected
+  Socket.on('room_created', async () => {
+    console.log('Socket event callback: room_created')
+
+    await setLocalStream(mediaConstraints)
+    isRoomCreator = true
+  })
+
+  Socket.on('room_joined', async () => {
+    console.log('Socket event callback: room_joined')
+
+    await setLocalStream(mediaConstraints)
+    Socket.emit('start_call', roomId)
+  })
+
+  Socket.on('full_room', () => {
+    console.log('Socket event callback: full_room')
+
+    alert('The room is full, please try another one')
+  })
+
+  Socket.on('start_call', async () => {
+    console.log('Socket event callback: start_call')
+
+    if (this.isRoomCreator) {
+      this.rtcPeerConnection = new RTCPeerConnection(this.iceServers)
+      addLocalTracks(this.rtcPeerConnection)
+      this.rtcPeerConnection.ontrack = setRemoteStream
+      this.rtcPeerConnection.onicecandidate = sendIceCandidate
+      await createOffer(this.rtcPeerConnection)
+    }
+  })
+
+  Socket.on('webrtc_offer', async (event) => {
+    console.log('Socket event callback: webrtc_offer')
+
+    if (!this.isRoomCreator) {
+      this.rtcPeerConnection = new RTCPeerConnection(this.iceServers)
+      addLocalTracks(this.rtcPeerConnection)
+      this.rtcPeerConnection.ontrack = setRemoteStream
+      this.rtcPeerConnection.onicecandidate = sendIceCandidate
+      this.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
+      await createAnswer(this.rtcPeerConnection)
+    }
+  })
+
+  Socket.on('webrtc_answer', (event) => {
+    console.log('Socket event callback: webrtc_answer')
+
+    this.rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
+  })
+
+  Socket.on('webrtc_ice_candidate', (event) => {
+    console.log('Socket event callback: webrtc_ice_candidate')
+
+    // ICE candidate configuration.
+    var candidate = new RTCIceCandidate({
+      sdpMLineIndex: event.label,
+      candidate: event.candidate,
+    })
+    this.rtcPeerConnection.addIceCandidate(candidate)
+  })
+
+  // FUNCTIONS ==================================================================
+  function joinRoom(room) {
+    if (room === '') {
+      alert('Please type a room ID')
+    } else {
+      this.roomId = room
+      Socket.emit('join', room)
+      showVideoConference()
+    }
+  }
+
+  function showVideoConference() {
+    this.roomSelectionContainer.style = 'display: none'
+    this.videoChatContainer.style = 'display: block'
+  }
+
+  async function setLocalStream(mediaConstraints) {
+    let stream
+    try {
+      stream = await navigator.mediaDevices.getUserMedia(mediaConstraints)
+    } catch (error) {
+      console.error('Could not get user media', error)
+    }
+
+    this.localStream = stream
+    this.localVideoComponent.srcObject = stream
+  }
+
+  function addLocalTracks(rtcPeerConnection) {
+    this.localStream.getTracks().forEach((track) => {
+      rtcPeerConnection.addTrack(track, this.localStream)
+    })
+  }
+
+  async function createOffer(rtcPeerConnection) {
+    let sessionDescription
+    try {
+      sessionDescription = await rtcPeerConnection.createOffer()
+      rtcPeerConnection.setLocalDescription(sessionDescription)
+    } catch (error) {
+      console.error(error)
+    }
+
+    Socket.emit('webrtc_offer', {
+      type: 'webrtc_offer',
+      sdp: sessionDescription
+    })
+  }
+
+  async function createAnswer(rtcPeerConnection) {
+    let sessionDescription
+    try {
+      sessionDescription = await rtcPeerConnection.createAnswer()
+      rtcPeerConnection.setLocalDescription(sessionDescription)
+    } catch (error) {
+      console.error(error)
+    }
+
+    Socket.emit('webrtc_answer', {
+      type: 'webrtc_answer',
+      sdp: sessionDescription
+    })
+  }
+
+  function setRemoteStream(event) {
+    this.remoteVideoComponent.srcObject = event.streams[0]
+    this.remoteStream = event.stream
+  }
+
+  function sendIceCandidate(event) {
+    if (event.candidate) {
+      Socket.emit('webrtc_ice_candidate', {
+        label: event.candidate.sdpMLineIndex,
+        candidate: event.candidate.candidate,
+      })
+    }
+  }
+
+
+}
+
+
+
+
+
+
+
+function justDoIt1(){
+  // DOM elements.
+let roomSelectionContainer = document.getElementById('room-selection-container') as unknown as HTMLCollectionOf<HTMLElement>
 const roomInput = document.getElementById('room-input')
 const connectButton = document.getElementById('connect-button')
 
-const videoChatContainer = document.getElementById('video-chat-container')
-const localVideoComponent = document.getElementById('local-video')
-const remoteVideoComponent = document.getElementById('remote-video')
+const videoChatContainer = document.getElementById('video-chat-container') as unknown as HTMLCollectionOf<HTMLElement>
+let localVideoComponent = document.getElementById('local-video')
+let remoteVideoComponent = document.getElementById('remote-video')
 
 // Variables.
 const mediaConstraints = {
@@ -189,22 +384,22 @@ const iceServers = {
 }
 
 // BUTTON LISTENER ============================================================
-connectButton() {
-  joinRoom(this.roomInput.value)
+function connectButton1() {
+  joinRoom(this.roomInput)
 }
 
 // SOCKET EVENT CALLBACKS =====================================================
 Socket.on('room_created', async () => {
   console.log('Socket event callback: room_created')
 
-  await setLocalStream(this.mediaConstraints)
+  await setLocalStream(mediaConstraints)
   isRoomCreator = true
 })
 
 Socket.on('room_joined', async () => {
   console.log('Socket event callback: room_joined')
 
-  await setLocalStream(this.mediaConstraints)
+  await setLocalStream(mediaConstraints)
   Socket.emit('start_call', roomId)
 })
 
@@ -263,14 +458,15 @@ function joinRoom(room) {
   } else {
     roomId = room
     Socket.emit('join', room)
-    showVideoConference()
+    //showVideoConference()
   }
 }
-
+/*
 function showVideoConference() {
-  this.roomSelectionContainer.style = 'display: none'
-  this.videoChatContainer.style = 'display: block'
+  roomSelectionContainer.style = 'display: none'
+  videoChatContainer.style = 'display: block'
 }
+*/
 
 async function setLocalStream(mediaConstraints) {
   let stream
@@ -281,7 +477,7 @@ async function setLocalStream(mediaConstraints) {
   }
 
   localStream = stream
-  this.localVideoComponent.srcObject = stream
+  localVideoComponent = stream
 }
 
 function addLocalTracks(rtcPeerConnection) {
@@ -315,7 +511,7 @@ async function createAnswer(rtcPeerConnection) {
     console.error(error)
   }
 
-  ocket.emit('webrtc_answer', {
+  Socket.emit('webrtc_answer', {
     type: 'webrtc_answer',
     sdp: sessionDescription,
     roomId,
@@ -323,18 +519,21 @@ async function createAnswer(rtcPeerConnection) {
 }
 
 function setRemoteStream(event) {
-  remoteVideoComponent.srcObject = event.streams[0]
+  remoteVideoComponent = event.streams[0]
   remoteStream = event.stream
 }
 
 function sendIceCandidate(event) {
   if (event.candidate) {
-    socket.emit('webrtc_ice_candidate', {
+    Socket.emit('webrtc_ice_candidate', {
       roomId,
       label: event.candidate.sdpMLineIndex,
       candidate: event.candidate.candidate,
     })
   }
 }
-
 }
+
+
+
+
