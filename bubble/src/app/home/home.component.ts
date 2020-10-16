@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RtcService } from '../services/rtc.service';
 import { Rtc2Service } from '../services/rtc2.service';
+import { WebsocketService } from '../services/websocket.service';
 import { Tile } from '../model/Tile.model';
 import { Bubble } from '../model/Bubble.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -9,9 +10,13 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder }
 @Component({
   selector: 'bbl-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [WebsocketService]
 })
+
 export class HomeComponent implements OnInit {
+
+  CHAT_URL: string = "ws://localhost:4200";
 
   audio: any = null;
   video: any = null;
@@ -35,10 +40,15 @@ export class HomeComponent implements OnInit {
     newBubble: [''],
   });
 
+  oldBubbleForm = this._fb.group({
+    oldBubble: [''],
+  });
+
   constructor(
     private _rtc: RtcService,
     private _fb: FormBuilder,
     private _rtc2: Rtc2Service,
+    wsService: WebsocketService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +64,7 @@ export class HomeComponent implements OnInit {
   drop(event: CdkDragDrop<Bubble[]>) {
     moveItemInArray(this.bubbles, event.previousIndex, event.currentIndex);
   }
+
 
   toggleAudio() {
     if(this.audio) {
@@ -123,6 +134,31 @@ export class HomeComponent implements OnInit {
       name: name
     } as Bubble);
     this.newBubbleForm.get("newBubble").setValue('');
+  }
+
+
+  joinOldBubble(name: string = ""){
+    if(!name) {
+      if (!this.oldBubbleForm.get("oldBubble")){
+        return;
+      }
+      name = this.oldBubbleForm.get("oldBubble").value;
+    }
+
+    for(let i=0; i<this.bubbles.length; i++){
+      if(name===this.bubbles[i].name){
+        //make connection
+        fetch("usersInRoom")
+        .then(response => response.json())
+        .then(usersinroom => {
+          usersinroom.array.forEach(element => {
+            //add these users who are in the room to person's screen who is just joining
+            this._rtc2.resetPeers(name);
+          });
+        })
+      }
+    }
+
   }
 
   activateRTC() {
