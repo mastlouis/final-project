@@ -19,8 +19,6 @@ export class Rtc2Service {
   }
 
   setUpEverything() {
-    let rtcConnected = false;
-
     const socketReady = new Promise((resolve, reject) => {
       let constr = null;
       constr = `wss://${window.location.host}`;
@@ -48,11 +46,6 @@ export class Rtc2Service {
       audio: true
     });
 
-    // const makeConnection = function (initiator) {
-      // console.log("making connection");
-      // this.ws.send(initiator);
-    // };
-
     Promise.all([avReady, socketReady]).then(values => {
       const stream = values[0];
 
@@ -61,22 +54,18 @@ export class Rtc2Service {
         trickle: false,
         stream
       }));
+      this.self.video = stream;
 
       this.self.peer.on("signal", data => {
-        // makeConnection(JSON.stringify(data));
         console.log("making connection");
         this.ws.send(JSON.stringify(data));
       });
 
       this.self.peer.on("stream", stream => {
-        // got remote video stream, now let's show it in a video tag
-        // var video = document.querySelector("video") as HTMLVideoElement;
-
-        // video.srcObject = stream;
-
-        // video.play();
-        this.self.video = stream;
-      })
-    })
+        let pd = new PeerData(null);
+        pd.video = stream;
+        this.clients.push(pd);
+      });
+    });
   }
 }

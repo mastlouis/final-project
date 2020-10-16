@@ -40,10 +40,10 @@ socketServer.on( 'connection', client => {
 	  // send msg to every client EXCEPT
     // the one who originally sent it. in this demo this is
     // used to send p2p offer/answer signals between clients
-    clients.forEach( c => {
+    for (let c of clients) {
       if( c !== client )
         c.send( msg );
-    });
+    };
   });
 
   // add client to client list

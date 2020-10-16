@@ -130,6 +130,15 @@ export class HomeComponent implements OnInit {
     let pageVideo = document.querySelector(".your-video") as HTMLVideoElement;
     pageVideo.srcObject = this.video;
     pageVideo.play()
+    for (let i = 0; i < this._rtc2.clients.length; i++) {
+      if (this.tiles.length + 1 < this._rtc2.clients.length){
+        this.tiles.push({text: `${i}`, cols: 1, rows: 1, color: 'lightblue', index: i} as Tile);
+      }
+      this.tiles[i + 1].stream = this._rtc2.clients[i].video;
+      let clientVideo = document.querySelector(`.client-${i+1}-video`) as HTMLVideoElement
+      clientVideo.srcObject = this._rtc2.clients[i].video;
+      clientVideo.play();
+    }
   }
 
 }

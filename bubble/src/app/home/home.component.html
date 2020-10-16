@@ -40,9 +40,17 @@
     [rowspan]="tile.rows"
     [style.background]="tile.color">
     <br>
+
+    <!-- You -->
     <div *ngIf="tile.index === 0">
       <video class="your-video" [ngClass]="{'mirror' : mirror}"></video>
     </div>
+
+    <!-- Them -->
+    <div *ngIf="tile.index !== 0">
+      <video class="client-{{i}}-video"></video>
+    </div>
+
     <mat-grid-tile-footer>
       <p>{{tile.text}}</p>
       <button *ngIf="tile.cols === 1" mat-button (click)="refocus(tile.index)">

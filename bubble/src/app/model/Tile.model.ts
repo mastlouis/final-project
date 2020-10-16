@@ -4,4 +4,5 @@ export interface Tile {
   rows: number;
   text: string;
   index: number;
+  stream?: any;
 }
