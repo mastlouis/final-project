@@ -46,6 +46,15 @@ socketServer.on( 'connection', client => {
     };
   });
 
+  let otherClientsAlive = 0;
+  for(let i = 0; i < clients.length; i++) {
+    if (clients[i].readyState === 1){
+      otherClientsAlive++;
+    }
+  }
+  console.log(`Other clients alive: ${otherClientsAlive}`); 
+  console.log(clients);
+
   // add client to client list
   clients.push( client )
   
@@ -53,7 +62,7 @@ socketServer.on( 'connection', client => {
     JSON.stringify({ 
       address:'connect',
       // we only initiate p2p if this is the second client connected
-      initiator:++count % 2 === 0
+      initiator: otherClientsAlive >= 1
     })
   );
   

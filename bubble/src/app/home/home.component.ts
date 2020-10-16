@@ -141,4 +141,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  debug() {
+    debugger;
+  }
+
 }

@@ -62,9 +62,21 @@ export class Rtc2Service {
       });
 
       this.self.peer.on("stream", stream => {
-        let pd = new PeerData(null);
+        let pd = new PeerData(new SimplePeer({
+          initiator: false,
+          stream
+        }));
         pd.video = stream;
         this.clients.push(pd);
+
+        // Remove from array when connection closes???
+        pd.peer.on("close", () => {
+          for (let i = 0; i < this.clients.length; i++){
+            if (this.clients[i] === pd) {
+              this.clients.splice(i, 1);
+            }
+          }
+        });
       });
     });
   }
