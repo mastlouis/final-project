@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "bubble"
+    }
+  },
+  "defaultProject": "bubble",
+  "cli": {
+    "analytics": "28100fdf-d1d8-4087-ad04-fb77a3a5f9a7"
+  }
 }
