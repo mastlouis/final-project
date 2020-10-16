@@ -1,7 +1,6 @@
 require("dotenv").config();  // For .env variables, check the Google Drive.
 const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -21,6 +20,55 @@ client.connect(err => {
 app.use(express.static("bubble/dist/bubble"));
 const server = http.createServer( app );
 const socketServer = new ws.Server({ server });
+
+//////////////
+// Passport //
+//////////////
+const passport = require('passport');
+const GitHubStrategy = require('passport-github').Strategy;
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('cookie-parser')());
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: process.env.GITHUB_CALLBACK_URL
+},
+function(accessToken, refreshToken, profile, cb) {
+  // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+  //   return cb(err, user);
+  // });
+  return cb(null, profile);
+}
+));
+
+app.get('/auth/github', 
+  passport.authenticate('github', { successReturnToOrRedirect: '/', failureRedirect: '/', failureFlash: 'Authentication Failed'}));
+
+app.get('/return',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+});
+
+//////////////////
+// End Passport //
+//////////////////
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
