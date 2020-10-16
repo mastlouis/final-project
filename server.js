@@ -22,15 +22,80 @@ app.use(express.static("bubble/dist/bubble"));
 const server = http.createServer( app );
 const socketServer = new ws.Server({ server });
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/bubble/dist/bubble/index.html");
+/* START OF PASSPORT CHANGES */
+const passport = require('passport');
+
+app.listen(process.env.PORT || 5000)
+
+const GitHubStrategy = require('passport-github').Strategy;
+
+passport.use(new GitHubStrategy({
+    clientID: "cbec862a05635fb23d9d",
+    clientSecret: "63089da72d4340bd55a34dbaa1843829759ca66a",
+    callbackURL: "http://localhost:4200/return"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+      console.log(profile)
+      return cb(null, profile);
+  }
+));
+
+passport.serializeUser(function(user, cb) {
+    cb(null, user);
+  });
+  
+passport.deserializeUser(function(obj, cb) {
+    cb(null, obj);
 });
 
+
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.get('/auth/github',
+passport.authenticate('github'));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/', 
+(req, res) => res.sendFile('/bubble/dist/bubble/auth.html', { root : __dirname, user: req.user}),
+require('connect-ensure-login').ensureLoggedIn(),
+);
+
+app.get('/home', 
+(req, res) => res.sendFile('/bubble/dist/bubble/index.html', { root : __dirname, user: req.user}),
+require('connect-ensure-login').ensureLoggedIn(),
+);
+
+app.get('/auth/github',
+passport.authenticate('github'));
+
+let userID;
+app.get('/error', (req, res) => res.send("error logging in"));
+
+app.get('/return',
+  passport.authenticate('github', { failureRedirect: '/error' }),
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res) {
+    userID = req.user.id
+    // console.log("user ID:", userID);
+    res.redirect('/home');
+  });
+
+
+
+/* END OF PASSPORT CHANGES */
+
 // https://expressjs.com/en/starter/basic-routing.html
-app.get("/about", (request, response) => {
-  response.sendFile(__dirname + "/bubble/dist/bubble/index.html");
-});
+// app.get("/", (request, response) => {
+//   response.sendFile(__dirname + "/bubble/dist/bubble/index.html");
+// });
+
+// // https://expressjs.com/en/starter/basic-routing.html
+// app.get("/about", (request, response) => {
+//   response.sendFile(__dirname + "/bubble/dist/bubble/index.html");
+// });
 
 let clients = [];
 let count = 0;
