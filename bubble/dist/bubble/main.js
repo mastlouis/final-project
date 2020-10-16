@@ -783,6 +783,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! node_modules/simple-peer/simplepeer.min.js */ "./node_modules/simple-peer/simplepeer.min.js");
 /* harmony import */ var node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _model_PeerData_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/PeerData.model */ "./src/app/model/PeerData.model.ts");
+
 
 
 
@@ -796,7 +798,6 @@ class Rtc2Service {
     }
     setUpEverything() {
         let rtcConnected = false;
-        let p = null;
         const socketReady = new Promise((resolve, reject) => {
             let constr = null;
             constr = `wss://${window.location.host}`;
@@ -811,7 +812,7 @@ class Rtc2Service {
                         resolve(msg.initiator);
                     }
                     else {
-                        p.signal(msg);
+                        this.self.peer.signal(msg);
                     }
                 };
             };
@@ -821,19 +822,21 @@ class Rtc2Service {
             video: true,
             audio: true
         });
-        const makeConnection = function (initiator) {
-            console.log("making connection");
-            this.ws.send(initiator);
-        };
+        // const makeConnection = function (initiator) {
+        // console.log("making connection");
+        // this.ws.send(initiator);
+        // };
         Promise.all([avReady, socketReady]).then(values => {
             const stream = values[0];
-            this.self.peer = new node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__({
+            this.self = new _model_PeerData_model__WEBPACK_IMPORTED_MODULE_2__["PeerData"](new node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__({
                 initiator: values[1],
                 trickle: false,
                 stream
-            });
+            }));
             this.self.peer.on("signal", data => {
-                makeConnection(JSON.stringify(data));
+                // makeConnection(JSON.stringify(data));
+                console.log("making connection");
+                this.ws.send(JSON.stringify(data));
             });
             this.self.peer.on("stream", stream => {
                 // got remote video stream, now let's show it in a video tag

@@ -20,7 +20,6 @@ export class Rtc2Service {
 
   setUpEverything() {
     let rtcConnected = false;
-    let p = null;
 
     const socketReady = new Promise((resolve, reject) => {
       let constr = null;
@@ -37,7 +36,7 @@ export class Rtc2Service {
           if (msg.address === 'connect') {
             resolve(msg.initiator)
           } else {
-            p.signal(msg);
+            this.self.peer.signal(msg);
           }
         };
       };
@@ -49,22 +48,24 @@ export class Rtc2Service {
       audio: true
     });
 
-    const makeConnection = function (initiator) {
-      console.log("making connection");
-      this.ws.send(initiator);
-    };
+    // const makeConnection = function (initiator) {
+      // console.log("making connection");
+      // this.ws.send(initiator);
+    // };
 
     Promise.all([avReady, socketReady]).then(values => {
       const stream = values[0];
 
-      this.self.peer = new SimplePeer({
+      this.self = new PeerData(new SimplePeer({
         initiator: values[1],
         trickle: false,
         stream
-      });
+      }));
 
       this.self.peer.on("signal", data => {
-        makeConnection(JSON.stringify(data));
+        // makeConnection(JSON.stringify(data));
+        console.log("making connection");
+        this.ws.send(JSON.stringify(data));
       });
 
       this.self.peer.on("stream", stream => {
