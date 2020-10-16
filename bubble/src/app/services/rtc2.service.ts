@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import defaultExport, * as SimplePeer from 'node_modules/simple-peer/simplepeer.min.js';
 import { PeerData } from '../model/PeerData.model';
+import { UsersInRoomResponse } from '../model/UsersInRoomResponse.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -10,6 +11,7 @@ export class Rtc2Service {
   self: PeerData;
   clients: PeerData[] = [];
   ws: WebSocket;
+  id: string = null;
 
   constructor(private http: HttpClient) {
     this.setUpEverything();
@@ -25,10 +27,27 @@ export class Rtc2Service {
     });
   }
 
-  setPeers(bubbleName) {
+  resetPeers(bubbleName) {
     this.getClients(bubbleName).subscribe({
-      next: response => {
+      next: (response: UsersInRoomResponse) => {
+        if(!this.id && response.id) {
+          this.id = response.id;
+        }
+        if(this.clients.length) {
+          // TODO: Destroy all clients
+          this.clients = [];
+        }
+        for(let i = 0; i < response.listOfClients.length; i++) {
+          let newPeer = new SimplePeer();
 
+          newPeer.on('signal', data => {
+
+          });
+          // Make a new peer
+          // When a 'signal' offer is generated, send the server the id
+          // of the client who should receive the offer
+            // That way each client knows who made every request
+        }
       },
       error: err => {
 

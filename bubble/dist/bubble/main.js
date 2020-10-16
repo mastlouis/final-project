@@ -262,6 +262,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
 /* harmony import */ var _angular_material_input__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/input */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/input.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
 
 
 
@@ -296,6 +298,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
             _angular_forms__WEBPACK_IMPORTED_MODULE_15__["ReactiveFormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_15__["FormsModule"],
             _angular_material_input__WEBPACK_IMPORTED_MODULE_14__["MatInputModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_16__["HttpClientModule"],
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
         _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"],
@@ -311,7 +314,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _angular_material_form_field__WEBPACK_IMPORTED_MODULE_13__["MatFormFieldModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_15__["ReactiveFormsModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_15__["FormsModule"],
-        _angular_material_input__WEBPACK_IMPORTED_MODULE_14__["MatInputModule"]] }); })();
+        _angular_material_input__WEBPACK_IMPORTED_MODULE_14__["MatInputModule"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_16__["HttpClientModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
         args: [{
@@ -334,6 +338,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _angular_forms__WEBPACK_IMPORTED_MODULE_15__["ReactiveFormsModule"],
                     _angular_forms__WEBPACK_IMPORTED_MODULE_15__["FormsModule"],
                     _angular_material_input__WEBPACK_IMPORTED_MODULE_14__["MatInputModule"],
+                    _angular_common_http__WEBPACK_IMPORTED_MODULE_16__["HttpClientModule"],
                 ],
                 providers: [],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -603,7 +608,7 @@ class HomeComponent {
 HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_rtc_service__WEBPACK_IMPORTED_MODULE_2__["RtcService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_rtc2_service__WEBPACK_IMPORTED_MODULE_4__["Rtc2Service"])); };
 HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["bbl-home"]], hostBindings: function HomeComponent_HostBindings(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("resize", function HomeComponent_resize_HostBindingHandler($event) { return ctx.onResize($event); }, false, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresolveWindow"]);
-    } }, decls: 29, vars: 5, consts: [["mat-button", "", "color", "primary", "href", "/auth/GitHub"], ["cdkDropList", "", "cdkDropListOrientation", "horizontal", 1, "example-chip", 3, "cdkDropListDropped"], ["class", "example-box", "cdkDrag", "", 3, "click", 4, "ngFor", "ngForOf"], [3, "formGroup"], ["matNativeControl", "", "matInput", "", "formControlName", "newBubble"], ["mat-button", "", 3, "disabled", "click"], ["mat-button", "", 3, "click"], ["mat-flat-button", "", "color", "warn", 3, "click"], [3, "cols"], [3, "colspan", "rowspan", "background", 4, "ngFor", "ngForOf"], ["cdkDrag", "", 1, "example-box", 3, "click"], [3, "colspan", "rowspan"], [4, "ngIf"], ["mat-button", "", 3, "click", 4, "ngIf"], [1, "your-video", 3, "ngClass"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 29, vars: 5, consts: [["mat-flat-button", "", "color", "primary", "href", "/auth/GitHub"], ["cdkDropList", "", "cdkDropListOrientation", "horizontal", 1, "example-chip", 3, "cdkDropListDropped"], ["class", "example-box", "cdkDrag", "", 3, "click", 4, "ngFor", "ngForOf"], [3, "formGroup"], ["matNativeControl", "", "matInput", "", "formControlName", "newBubble"], ["mat-button", "", 3, "disabled", "click"], ["mat-button", "", 3, "click"], ["mat-flat-button", "", "color", "warn", 3, "click"], [3, "cols"], [3, "colspan", "rowspan", "background", 4, "ngFor", "ngForOf"], ["cdkDrag", "", 1, "example-box", 3, "click"], [3, "colspan", "rowspan"], [4, "ngIf"], ["mat-button", "", 3, "click", 4, "ngIf"], [1, "your-video", 3, "ngClass"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Welcome to Bubble! I needed a working title to create the project, and we can rename it if anyone has a preference.");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -815,17 +820,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! node_modules/simple-peer/simplepeer.min.js */ "./node_modules/simple-peer/simplepeer.min.js");
 /* harmony import */ var node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _model_PeerData_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/PeerData.model */ "./src/app/model/PeerData.model.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
 
 
 
 
 class Rtc2Service {
-    constructor() {
+    constructor(http) {
+        this.http = http;
         this.clients = [];
+        this.id = null;
         this.setUpEverything();
     }
     getVideo() {
         return this.self.video;
+    }
+    getClients(bubbleName) {
+        return this.http.post('usersInRoom', {
+            bubbleName
+        });
+    }
+    resetPeers(bubbleName) {
+        this.getClients(bubbleName).subscribe({
+            next: (response) => {
+                if (!this.id && response.id) {
+                    this.id = response.id;
+                }
+                if (this.clients.length) {
+                    // TODO: Destroy all clients
+                    this.clients = [];
+                }
+                for (let i = 0; i < response.listOfClients.length; i++) {
+                    // Make a new peer
+                    // When a 'signal' offer is generated, send the server the id
+                    // of the client who should receive the offer
+                    // That way each client knows who made every request
+                }
+            },
+            error: err => {
+            }
+        });
     }
     setUpEverything() {
         const socketReady = new Promise((resolve, reject) => {
@@ -883,14 +918,14 @@ class Rtc2Service {
         });
     }
 }
-Rtc2Service.ɵfac = function Rtc2Service_Factory(t) { return new (t || Rtc2Service)(); };
+Rtc2Service.ɵfac = function Rtc2Service_Factory(t) { return new (t || Rtc2Service)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"])); };
 Rtc2Service.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: Rtc2Service, factory: Rtc2Service.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](Rtc2Service, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),

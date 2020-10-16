@@ -20,6 +20,7 @@ client.connect(err => {
 app.use(express.static("bubble/dist/bubble"));
 const server = http.createServer( app );
 const socketServer = new ws.Server({ server });
+const bodyParser = require('body-parser');
 
 //////////////
 // Passport //
@@ -27,7 +28,8 @@ const socketServer = new ws.Server({ server });
 
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-app.use(require('body-parser').urlencoded({ extended: true }));
+const auth = require('connect-ensure-login');
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({
   secret: 'keyboard cat',
@@ -81,20 +83,13 @@ app.get("/about", (request, response) => {
   response.sendFile(__dirname + "/bubble/dist/bubble/index.html");
 });
 
-//////////////
-// Requests //
-//////////////
-
-app.post('/usersInRoom', bodyParser.json(), auth.ensureLoggedIn('/auth/github'), function addRun (request, response) {
-  request.body;
-  console.log(`Got message from user ${request.user.username}`);
-});
-
 //////////////////
 // Socket Logic //
 //////////////////
 
+let bubbles = [];
 let clients = [];
+let clientdata = [];
 let count = 0;
 socketServer.on( 'connection', client => {
   // when the server receives a message from this client...
@@ -129,6 +124,55 @@ socketServer.on( 'connection', client => {
   );
   
 });
+
+//////////////
+// Requests //
+//////////////
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+app.post('/usersInRoom', bodyParser.json(), auth.ensureLoggedIn('/auth/github'), function addRun (request, response) {
+  console.log(`Got message from user ${request.user.username}`);
+  let data = {
+    id: null,
+    listOfClients: []
+  }
+  if (request.body.needsId) {
+    data.id = uuidv4();
+  }
+  for( let i = 0; i < clientdata.length; i++) {
+    if (clientdata[i].bubble === request.body.bubbleName) {
+      listOfClients.push(clientdata[i].client);
+    } 
+  }
+  response.json(data);
+  
+});
+
+app.post('/getClientInfo', bodyParser.json(), auth.ensureLoggedIn('/auth/github'), function addRun (request, response) {
+  console.log(`Got message from user ${request.user.username}`);
+  let data = {
+    id: null,
+    listOfClients: []
+  }
+  if (request.body.needsId) {
+    data.id = uuidv4();
+  }
+  for( let i = 0; i < clientdata.length; i++) {
+    if (clientdata[i].bubble === request.body.bubbleName) {
+      listOfClients.push(clientdata[i].client);
+    } 
+  }
+  response.json(data);
+  
+});
+
+
 
 ////////////
 // Listen //
