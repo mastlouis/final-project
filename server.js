@@ -24,6 +24,7 @@ const socketServer = new ws.Server({ server });
 //////////////
 // Passport //
 //////////////
+
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 app.use(require('body-parser').urlencoded({ extended: true }));
@@ -66,9 +67,9 @@ app.get('/return',
     res.redirect('/');
 });
 
-//////////////////
-// End Passport //
-//////////////////
+/////////////
+// Routing //
+/////////////
 
 // https://expressjs.com/en/starter/basic-routing.html
 app.get("/", (request, response) => {
@@ -79,6 +80,19 @@ app.get("/", (request, response) => {
 app.get("/about", (request, response) => {
   response.sendFile(__dirname + "/bubble/dist/bubble/index.html");
 });
+
+//////////////
+// Requests //
+//////////////
+
+app.post('/usersInRoom', bodyParser.json(), auth.ensureLoggedIn('/auth/github'), function addRun (request, response) {
+  request.body;
+  console.log(`Got message from user ${request.user.username}`);
+});
+
+//////////////////
+// Socket Logic //
+//////////////////
 
 let clients = [];
 let count = 0;
@@ -115,6 +129,10 @@ socketServer.on( 'connection', client => {
   );
   
 });
+
+////////////
+// Listen //
+////////////
 
 // listen for requests :)
 const listener = server.listen(process.env.PORT, () => {

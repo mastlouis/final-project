@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import defaultExport, * as SimplePeer from 'node_modules/simple-peer/simplepeer.min.js';
 import { PeerData } from '../model/PeerData.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,29 @@ export class Rtc2Service {
   clients: PeerData[] = [];
   ws: WebSocket;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.setUpEverything();
   }
 
   getVideo() {
     return this.self.video;
+  }
+
+  getClients(bubbleName) {
+    return this.http.post('usersInRoom', {
+      bubbleName
+    });
+  }
+
+  setPeers(bubbleName) {
+    this.getClients(bubbleName).subscribe({
+      next: response => {
+
+      },
+      error: err => {
+
+      }
+    })
   }
 
   setUpEverything() {
