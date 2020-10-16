@@ -90,6 +90,14 @@ app.get("/about", (request, response) => {
 let bubbles = [];
 let clients = [];
 let clientdata = [];
+/*
+clientdata: { 
+  bubble: string,
+  client: WebSocket,
+  id: string
+  // Add more as needed
+}[]
+*/
 let count = 0;
 socketServer.on( 'connection', client => {
   // when the server receives a message from this client...
