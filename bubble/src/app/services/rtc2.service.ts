@@ -37,11 +37,19 @@ export class Rtc2Service {
           // TODO: Destroy all clients
           this.clients = [];
         }
-        for(let i = 0; i < response.listOfClients.length; i++) {
+        // for(let i = 0; i < response.listOfClients.length; i++) {
+        {
           let newPeer = new SimplePeer();
+          newPeer.send('hi peer2, this is peer1')
 
+          newPeer.on('connect', data => {
+            newPeer.send('hi peer2, this is peer1, but in the connect block');
+          });
+          newPeer.on('data', data => {
+            newPeer.send(`Got some data: `);
+          });
           newPeer.on('signal', data => {
-
+            newPeer.send('New peer just got signaled?');
           });
           // Make a new peer
           // When a 'signal' offer is generated, send the server the id
