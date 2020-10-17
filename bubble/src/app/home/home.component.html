@@ -1,6 +1,9 @@
 <p style="text-align: center;">Welcome to <b>Bubble!</b> This application allows users to join bubbles and start chatting!</p>
 
 <a mat-flat-button color="primary" href="/auth/GitHub">Login with GitHub</a>
+<button mat-flat-button color="primary" (click)="openDialog()">
+  <mat-icon>info</mat-icon>
+</button>
 
 <h2>Bubbles</h2>
 <mat-chip-list class="example-chip" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">

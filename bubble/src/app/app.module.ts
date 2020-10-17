@@ -16,11 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { InfoComponent } from './info/info.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatInputModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -439,7 +439,7 @@ module.exports = content.locals || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Ann\Desktop\final-project\bubble\src\styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! /Users/matthewstlouis/Documents/College/Senior Year/Fall2020/Webware/Projects/final-project/bubble/src/styles.scss */"./src/styles.scss");
 
 
 /***/ })

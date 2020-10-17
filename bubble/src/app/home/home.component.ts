@@ -6,6 +6,8 @@ import { Tile } from '../model/Tile.model';
 import { Bubble } from '../model/Bubble.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { InfoComponent } from '../info/info.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'bbl-home',
@@ -48,7 +50,8 @@ export class HomeComponent implements OnInit {
     private _rtc: RtcService,
     private _fb: FormBuilder,
     private _rtc2: Rtc2Service,
-    wsService: WebsocketService
+    wsService: WebsocketService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -180,6 +183,14 @@ export class HomeComponent implements OnInit {
 
   debug() {
     debugger;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(InfoComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }
