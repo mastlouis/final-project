@@ -36,7 +36,7 @@ export class Rtc2Service {
         }
         if(this.clients.length) {
           // TODO: Destroy all clients
-          this.clients = [];
+          // this.clients = [];
         }
         for(let i = 0; i < response.listOfClients.length; i++) {
         // {

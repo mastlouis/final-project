@@ -566,7 +566,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "button", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HomeComponent_Template_button_click_27_listener() { return ctx.joinOldBubble(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "mat-icon");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "add");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "keyboard_arrow_right");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -653,13 +653,13 @@ InfoComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " If you would like to login via github, please select the login via github button. If we were to add on to our application, this would allow you to join with your github username. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, " To see your own video, please select the \u201Cconnect\u201D button. This will allow you to see your own video in one of the video tiles below. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, " To connect your own video feed and those of other users, please select the \u201Cconnect\u201D button. This will populate the video feeds into the tiles below. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, " To join an existing call, type the name of the bubble corresponding to the call in the \u201Cjoin an old bubble\u201D and press the plus sign. Currently, you will only be able to join \u201Cone\u201D, \u201Ctwo\u201D, or \u201Cthree\u201D. If we were to extend our application, we would implement the ability to join any of the bubbles shown above the text entry boxes by typing their name into the box. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, " To join an existing call, type the name of the bubble corresponding to the call in the \u201Cjoin an old bubble\u201D and press the right arrow button. Currently, you will only be able to join \u201Cone\u201D, \u201Ctwo\u201D, or \u201Cthree\u201D. If we were to extend our application, we would implement the ability to join any of the bubbles shown above the text entry boxes by typing their name into the box. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " To create and join a new bubble, please enter the name of your new call in the \u201Cnew bubble\u201D box and press the plus sign. To pause the chrome tools debugger, select the \u201CDebug\u201D button with chrome devtools open. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " To create and join a new bubble, please enter the name of your new call in the \u201Cnew bubble\u201D box and press the plus sign. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "mat-dialog-actions", 2);
@@ -844,7 +844,7 @@ class Rtc2Service {
                 }
                 if (this.clients.length) {
                     // TODO: Destroy all clients
-                    this.clients = [];
+                    // this.clients = [];
                 }
                 for (let i = 0; i < response.listOfClients.length; i++) {
                     // {
