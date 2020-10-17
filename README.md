@@ -32,7 +32,7 @@ In the final stages of the project, the entire group worked in a peer programmin
 **Matthew St. Louis:** Matt designed the entire UI using Angular in a very clean way. In addition to being completely responsible for the structure of our UI, Matt was also mainly responsible for setting up WebRTC to get a solo video to show up. Matt was also responsible for doing peer-to-peer implementation of setting up connections between videos of two different users. Matt also worked with Haley and Ann on implementing the logic for users to enter different bubbles.
 
 
-### Project Video Link:
+### Project Video Link: https://youtu.be/epEMZzjsqcg
 
 ### Resources*:
 - https://github.com/feross/simple-peer
