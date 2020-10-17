@@ -1,5 +1,7 @@
 ### Project Title: Bubble
+
 **Hosting Link:**
+
 **Team Members:** Haley Hauptfeld, Ann Jicha, Matthew St. Louis
 
 ### Project Description: 
