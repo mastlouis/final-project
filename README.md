@@ -1,18 +1,26 @@
-### Project Title: Bubble
+# Project Title: Bubble
 
-**Hosting Link:** https://cs4241-a20-team-28.glitch.me/
+**Hosting Link:** [https://cs4241-a20-team-28.glitch.me/](https://cs4241-a20-team-28.glitch.me/)
+
+[**Video Link**](https://youtu.be/epEMZzjsqcg)
 
 **Team Members:** Haley Hauptfeld, Ann Jicha, Matthew St. Louis
 
-### Project Description: 
+## Project Description: 
 
 Our project is a video chat web application called ‘Bubble’. Users can connect with peers over video and audio through bubbles that are similar to meeting rooms. Our application is similar to the popular video chat app, Zoom, but we added different functionality to make it more user-friendly. Our application differs from Zoom in that users can switch from one video chat “bubble” to another in real time. This makes it easier to chat with different smaller groups of people within a large crowd at the same time, unlike Zoom’s breakout rooms, which can only be controlled by the host of a meeting. In regards to our tech stack, we used MongoDB for our database, Express as middleware, and the Angular framework for our front-end. We also used GitHub OAuth for user authentication. We used the simple-peer library to integrate WebRTC into our application so that users can chat through video and audio. We also used web sockets to send information between users within the same bubble.
 
-### Additional Instructions: 
+## Additional Instructions: 
 
-All of the instructions are listed on the homepage of the application.
+The application comes with some instructions on the info (i) button on the home page, but there is a bit more functionality to explain if you try to grade it. 
 
-### Challenges: 
+The app can successfully connect the audio and video of two users, but it can currently only do so for two users, and these must be the first two users to connect over the server. We tried to add in some code to account for peers that drop out of the network, but it was unsuccessful. If you want to test this out for grading, you can try it once per server reset. To reset the server, re-import the project from mastlouis/final-project:. (note the period) on [Glitch](https://glitch.com/edit/#!/join/5008e916-8497-4836-a7b6-74525a801cc9). You only have to do this if you would really like to see the peer-to-peer communication in action.
+
+Furthermore, for peer-to-peer communication to work, only hit the "Connect" button to connect your video feed. Do not join a bubble, as this will remove your current connections. This was done to help a user leave a bubble.
+
+We attempted to write the logic to allow users to enter and leave bubbles using uuid's that the server assigns, manages, and distributes back to clients as needed, but we were unable to connect users after this, as further detailed in the [challenges](#challenges) section.
+
+## Challenges: 
 
 Our team ran into a lot of challenges with getting web sockets to work in regards to sending information between two users within a bubble. Due to the time restraints of the project, we were unable to fully implement the concept of entering a bubble and communicating between two users within a specific bubble. However, if we had more time to implement our project, this is the blocker that we would continue to tackle. If we had more time to debug this issue, we would pinpoint our problem towards implementing web sockets properly. We completed a lot of research on how web sockets work, and saw many successful Angular implementations that created a WebSocket service. We had the parts and pieces that are necessary for implementing WebSockets in order to create connections between peers that exist within a bubble. However, we were unable to make those pieces connect. If given more time, this is where we would focus our energy.
 
@@ -23,7 +31,7 @@ A challenge that we were able to overcome was creating a peer-to-peer video and 
 In the final stages of the project, the entire group worked in a peer programming system, rotating the so-called “driver”, in order to attempt to work through the most difficult logic. Through this approach, we gained a collective understanding of simple-peer and what we were able to implement.
 
 
-### Team Member Responsibilities:
+## Team Member Responsibilities:
 
 **Haley Hauptfeld:** Haley researched how to implement WebRTC, web sockets, and the simple-peer library. These are all technologies that the entire group had never used before, so research was integral to our understanding of how to implement our project. Haley was also responsible for beginning the implementation of having users enter different bubbles, as opposed to one global chat room.
 
@@ -31,10 +39,7 @@ In the final stages of the project, the entire group worked in a peer programmin
 
 **Matthew St. Louis:** Matt designed the entire UI using Angular in a very clean way. In addition to being completely responsible for the structure of our UI, Matt was also mainly responsible for setting up WebRTC to get a solo video to show up. Matt was also responsible for doing peer-to-peer implementation of setting up connections between videos of two different users. Matt also worked with Haley and Ann on implementing the logic for users to enter different bubbles.
 
-
-### Project Video Link: https://youtu.be/epEMZzjsqcg
-
-### Resources*:
+## Resources*:
 - https://github.com/feross/simple-peer
 - https://github.com/borjanebbal/webrtc-node-app
 - https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
