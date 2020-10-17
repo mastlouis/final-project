@@ -223,7 +223,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c0));
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c1));
-    } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_1__["MatToolbar"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButton"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__["MatIcon"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterOutlet"]], styles: ["#page-container[_ngcontent-%COMP%] {\n  padding: 2em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBQTtBQUNGIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3BhZ2UtY29udGFpbmVyIHtcclxuICBwYWRkaW5nOiAyZW07XHJcbn1cclxuIl19 */"] });
+    } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_1__["MatToolbar"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButton"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__["MatIcon"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterOutlet"]], styles: ["#page-container[_ngcontent-%COMP%] {\n  padding: 2em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsWUFBQTtBQUNGIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI3BhZ2UtY29udGFpbmVyIHtcbiAgcGFkZGluZzogMmVtO1xufVxuIl19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AppComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -602,15 +602,16 @@ class HomeComponent {
         }
         for (let i = 0; i < this.bubbles.length; i++) {
             if (name === this.bubbles[i].name) {
+                this._rtc2.resetPeers(name);
                 //make connection
-                fetch("usersInRoom")
-                    .then(response => response.json())
-                    .then(usersinroom => {
-                    usersinroom.array.forEach(element => {
-                        //add these users who are in the room to person's screen who is just joining
-                        this._rtc2.resetPeers(name);
-                    });
-                });
+                // fetch("usersInRoom")
+                // .then(response => response.json())
+                // .then(usersinroom => {
+                // usersinroom.array.forEach(element => {
+                //add these users who are in the room to person's screen who is just joining
+                // this._rtc2.resetPeers(name);
+                // });
+                // })
             }
         }
     }
@@ -716,7 +717,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("cols", ctx.numCols);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.tiles);
-    } }, directives: [_angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatAnchor"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_7__["MatChipList"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_9__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_9__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_10__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButton"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_11__["MatIcon"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridList"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_7__["MatChip"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridTile"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridTileText"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridTileFooterCssMatStyler"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgClass"]], styles: [".mirror[_ngcontent-%COMP%] {\n  transform: rotateY(180deg);\n  -webkit-transform: rotateY(180deg);\n  \n  -moz-transform: rotateY(180deg);\n  \n}\n\nvideo[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n\n.example-box.cdk-drag-animating[_ngcontent-%COMP%] {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n\n.example-chip[_ngcontent-%COMP%]   .cdk-drop-list-dragging[_ngcontent-%COMP%] {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMEJBQUE7RUFDQSxrQ0FBQTtFQUFtQyxzQkFBQTtFQUNuQywrQkFBQTtFQUFnQyxZQUFBO0FBR3BDOztBQUFBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7QUFHRjs7QUFBQTtFQUNFLHNEQUFBO0FBR0Y7O0FBQUE7RUFDRSxzREFBQTtBQUdGIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1pcnJvciB7XHJcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZVkoMTgwZGVnKTtcclxuICAgIC13ZWJraXQtdHJhbnNmb3JtOnJvdGF0ZVkoMTgwZGVnKTsgLyogU2FmYXJpIGFuZCBDaHJvbWUgKi9cclxuICAgIC1tb3otdHJhbnNmb3JtOnJvdGF0ZVkoMTgwZGVnKTsgLyogRmlyZWZveCAqL1xyXG59XHJcblxyXG52aWRlbyB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG4uZXhhbXBsZS1ib3guY2RrLWRyYWctYW5pbWF0aW5nIHtcclxuICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMjUwbXMgY3ViaWMtYmV6aWVyKDAsIDAsIDAuMiwgMSk7XHJcbn1cclxuXHJcbi5leGFtcGxlLWNoaXAgLmNkay1kcm9wLWxpc3QtZHJhZ2dpbmcge1xyXG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAyNTBtcyBjdWJpYy1iZXppZXIoMCwgMCwgMC4yLCAxKTtcclxufVxyXG4iXX0= */"] });
+    } }, directives: [_angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatAnchor"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_7__["MatChipList"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_9__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_9__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_10__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], _angular_material_button__WEBPACK_IMPORTED_MODULE_6__["MatButton"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_11__["MatIcon"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridList"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_7__["MatChip"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridTile"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridTileText"], _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_12__["MatGridTileFooterCssMatStyler"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgClass"]], styles: [".mirror[_ngcontent-%COMP%] {\n  transform: rotateY(180deg);\n  -webkit-transform: rotateY(180deg);\n  \n  -moz-transform: rotateY(180deg);\n  \n}\n\nvideo[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 100%;\n}\n\n.example-box.cdk-drag-animating[_ngcontent-%COMP%] {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n\n.example-chip[_ngcontent-%COMP%]   .cdk-drop-list-dragging[_ngcontent-%COMP%] {\n  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMEJBQUE7RUFDQSxrQ0FBQTtFQUFtQyxzQkFBQTtFQUNuQywrQkFBQTtFQUFnQyxZQUFBO0FBR3BDOztBQUFBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7QUFHRjs7QUFBQTtFQUNFLHNEQUFBO0FBR0Y7O0FBQUE7RUFDRSxzREFBQTtBQUdGIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1pcnJvciB7XG4gICAgdHJhbnNmb3JtOiByb3RhdGVZKDE4MGRlZyk7XG4gICAgLXdlYmtpdC10cmFuc2Zvcm06cm90YXRlWSgxODBkZWcpOyAvKiBTYWZhcmkgYW5kIENocm9tZSAqL1xuICAgIC1tb3otdHJhbnNmb3JtOnJvdGF0ZVkoMTgwZGVnKTsgLyogRmlyZWZveCAqL1xufVxuXG52aWRlbyB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG5cbi5leGFtcGxlLWJveC5jZGstZHJhZy1hbmltYXRpbmcge1xuICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMjUwbXMgY3ViaWMtYmV6aWVyKDAsIDAsIDAuMiwgMSk7XG59XG5cbi5leGFtcGxlLWNoaXAgLmNkay1kcm9wLWxpc3QtZHJhZ2dpbmcge1xuICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMjUwbXMgY3ViaWMtYmV6aWVyKDAsIDAsIDAuMiwgMSk7XG59XG4iXX0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](HomeComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -885,7 +886,8 @@ class Rtc2Service {
     }
     getClients(bubbleName) {
         return this.http.post('usersInRoom', {
-            bubbleName
+            bubbleName,
+            id: this.id
         });
     }
     resetPeers(bubbleName) {
@@ -898,19 +900,20 @@ class Rtc2Service {
                     // TODO: Destroy all clients
                     this.clients = [];
                 }
-                // for(let i = 0; i < response.listOfClients.length; i++) {
-                {
-                    let newPeer = new node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__();
-                    newPeer.send('hi peer2, this is peer1');
-                    newPeer.on('connect', data => {
-                        newPeer.send('hi peer2, this is peer1, but in the connect block');
-                    });
-                    newPeer.on('data', data => {
-                        newPeer.send(`Got some data: `);
-                    });
-                    newPeer.on('signal', data => {
-                        newPeer.send('New peer just got signaled?');
-                    });
+                for (let i = 0; i < response.listOfClients.length; i++) {
+                    // {
+                    // let newPeer = new SimplePeer();
+                    // newPeer.send('hi peer2, this is peer1, but from the reset method')
+                    // newPeer.on('connect', data => {
+                    //   newPeer.send('hi peer2, this is peer1, but in the connect block');
+                    // });
+                    // newPeer.on('data', data => {
+                    //   newPeer.send(`Got some data: `);
+                    // });
+                    // newPeer.on('signal', data => {
+                    //   newPeer.send('New peer just got signaled?');
+                    // });
+                    this.setupSocket(response.listOfIDs[i]);
                     // Make a new peer
                     // When a 'signal' offer is generated, send the server the id
                     // of the client who should receive the offer
@@ -918,7 +921,60 @@ class Rtc2Service {
                 }
             },
             error: err => {
+                console.error(`Something went horribly wrong: ${err}`);
             }
+        });
+    }
+    setupSocket(id) {
+        let newWS;
+        const socketReady = new Promise((resolve, reject) => {
+            let constr = null;
+            constr = `wss://${window.location.host}`;
+            if (window.location.hostname === "localhost") {
+                constr = `ws://${window.location.host}`;
+            }
+            newWS = new WebSocket(constr);
+            newWS.onopen = () => {
+                newWS.onmessage = __msg => {
+                    const msg = JSON.parse(__msg.data);
+                    if (msg.address === 'id') {
+                        this.id = msg.body;
+                    }
+                    else if (msg.address === 'connect') {
+                        resolve(msg.initiator);
+                    }
+                    else {
+                        this.self.peer.signal(msg);
+                    }
+                };
+            };
+        });
+        const avReady = navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        });
+        Promise.all([avReady, socketReady]).then(values => {
+            this.self.peer.on("signal", data => {
+                console.log(`making connection to additional peer ${id}`);
+                newWS.send(JSON.stringify(data));
+            });
+            this.self.peer.on("stream", stream => {
+                let pd = new _model_PeerData_model__WEBPACK_IMPORTED_MODULE_2__["PeerData"](new node_modules_simple_peer_simplepeer_min_js__WEBPACK_IMPORTED_MODULE_1__({
+                    initiator: true,
+                    stream
+                }));
+                pd.ws = newWS;
+                pd.video = stream;
+                this.clients.push(pd);
+                // Remove from array when connection closes???
+                pd.peer.on("close", () => {
+                    for (let i = 0; i < this.clients.length; i++) {
+                        if (this.clients[i] === pd) {
+                            this.clients.splice(i, 1);
+                        }
+                    }
+                });
+            });
         });
     }
     setUpEverything() {
@@ -932,7 +988,10 @@ class Rtc2Service {
             this.ws.onopen = () => {
                 this.ws.onmessage = __msg => {
                     const msg = JSON.parse(__msg.data);
-                    if (msg.address === 'connect') {
+                    if (msg.address === 'id') {
+                        this.id = msg.body;
+                    }
+                    else if (msg.address === 'connect') {
                         resolve(msg.initiator);
                     }
                     else {
@@ -1101,7 +1160,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Hauptfeld\Documents\GitHub\final-project\bubble\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/matthewstlouis/Documents/College/Senior Year/Fall2020/Webware/Projects/final-project/bubble/src/main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -119,10 +119,21 @@ socketServer.on( 'connection', client => {
   }
   console.log(`Other clients alive: ${otherClientsAlive}`); 
   console.log(clients);
-
+  let id = uuidv4();
   // add client to client list
   clients.push( client )
+  clientdata.push({
+    bubble: '',
+    client: client,
+    id: id
+  });
   
+  client.send(
+    JSON.stringify({ 
+      address:'id',
+      body: id
+    })
+  );
   client.send(
     JSON.stringify({ 
       address:'connect',
@@ -144,26 +155,35 @@ function uuidv4() {
   });
 }
 
-app.post('/usersInRoom', bodyParser.json(), auth.ensureLoggedIn('/auth/github'), function addRun (request, response) {
-  console.log(`Got message from user ${request.user.username}`);
+app.post('/usersInRoom', bodyParser.json(), function addRun (request, response) {
+  // console.log(`Got message from user ${request.user.username}`);
+  console.log(`Contents of clients before: ${clients}`);
+  console.log(`Contents of clientdata: ${clientdata}`);
   let data = {
     id: null,
-    listOfClients: []
-  }
-  if (request.body.needsId) {
-    data.id = uuidv4();
+    listOfClients: [],
+    listOfIDs: []
   }
   for( let i = 0; i < clientdata.length; i++) {
-    if (clientdata[i].bubble === request.body.bubbleName) {
-      listOfClients.push(clientdata[i].client);
+    if (request.body.id === clientdata[i].id) {
+      clientdata[i].bubble = request.body.bubbleName;
     } 
   }
+  for( let i = 0; i < clientdata.length; i++) {
+    if (clientdata[i].bubble === request.body.bubbleName
+      && request.body.id !== clientdata[i].id) {
+      data.listOfClients.push(clientdata[i].client);
+      data.listOfIDs.push(clientdata[i].id);
+    } 
+  }
+  console.log(`Contents of clientdata after: ${clients}`);
+  console.log(clients);
   response.json(data);
   
 });
 
-app.post('/getClientInfo', bodyParser.json(), auth.ensureLoggedIn('/auth/github'), function addRun (request, response) {
-  console.log(`Got message from user ${request.user.username}`);
+app.post('/getClientInfo', bodyParser.json(), function addRun (request, response) {
+  // console.log(`Got message from user ${request.user.username}`);
   let data = {
     id: null,
     listOfClients: []

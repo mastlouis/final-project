@@ -147,15 +147,16 @@ export class HomeComponent implements OnInit {
 
     for(let i=0; i<this.bubbles.length; i++){
       if(name===this.bubbles[i].name){
+        this._rtc2.resetPeers(name);
         //make connection
-        fetch("usersInRoom")
-        .then(response => response.json())
-        .then(usersinroom => {
-          usersinroom.array.forEach(element => {
+        // fetch("usersInRoom")
+        // .then(response => response.json())
+        // .then(usersinroom => {
+          // usersinroom.array.forEach(element => {
             //add these users who are in the room to person's screen who is just joining
-            this._rtc2.resetPeers(name);
-          });
-        })
+            // this._rtc2.resetPeers(name);
+          // });
+        // })
       }
     }
 
