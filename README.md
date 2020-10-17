@@ -35,27 +35,27 @@ In the final stages of the project, the entire group worked in a peer programmin
 ### Project Video Link:
 
 ### Resources*:
-https://github.com/feross/simple-peer
-https://github.com/borjanebbal/webrtc-node-app
-https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
-https://livebook.manning.com/book/angular-development-with-typescript-second-edition/chapter-13/86
-https://glitch.com/edit/#!/webrtc-video-simplepeer?path=server.js%3A1%3A0
-https://web.microsoftstream.com/video/8a327733-925d-4238-9748-ca758ba57905
-https://web.microsoftstream.com/video/440d03b4-439c-412a-bc41-94b369e5964c
-https://web.microsoftstream.com/video/69cee54d-ba59-446c-9289-deb122e08f53
-https://tutorialedge.net/typescript/angular/angular-websockets-tutorial/
-https://javascript-conference.com/blog/real-time-in-angular-a-journey-into-websocket-and-rxjs/
-https://medium.com/briebug-blog/making-use-of-websockets-in-angular-way-easier-than-you-expected-25dd0061db1d
-https://dimitr.im/websockets-angular
-https://tutorialedge.net/typescript/typescript-socket-io-tutorial/
-https://www.youtube.com/watch?reload=9&v=POzZ0-y2ZX8&ab_channel=CodeKul
-https://tutorialedge.net/typescript/angular/angular-socket-io-tutorial/
-https://medium.com/factory-mind/websocket-node-js-express-step-by-step-using-typescript-725114ad5fe4
-https://www.sitepoint.com/webrtc-video-chat-application-simplewebrtc/
-https://www.cometchat.com/tutorials/angular-voice-video-chat
-https://scotch.io/tutorials/build-a-video-chat-service-with-javascript-webrtc-and-okta
-https://www.nexmo.com/blog/2020/05/08/create-a-basic-video-chat-app-with-asp-net-and-angular-dr
-https://medium.com/@Anderson7301/building-a-video-chat-app-with-agora-and-angular-6-858d72b6fa0d
+- https://github.com/feross/simple-peer
+- https://github.com/borjanebbal/webrtc-node-app
+- https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
+- https://livebook.manning.com/book/angular-development-with-typescript-second-edition/chapter-13/86
+- https://glitch.com/edit/#!/webrtc-video-simplepeer?path=server.js%3A1%3A0
+- https://web.microsoftstream.com/video/8a327733-925d-4238-9748-ca758ba57905
+- https://web.microsoftstream.com/video/440d03b4-439c-412a-bc41-94b369e5964c
+- https://web.microsoftstream.com/video/69cee54d-ba59-446c-9289-deb122e08f53
+- https://tutorialedge.net/typescript/angular/angular-websockets-tutorial/
+- https://javascript-conference.com/blog/real-time-in-angular-a-journey-into-websocket-and-rxjs/
+- https://medium.com/briebug-blog/making-use-of-websockets-in-angular-way-easier-than-you-expected-25dd0061db1d
+- https://dimitr.im/websockets-angular
+- https://tutorialedge.net/typescript/typescript-socket-io-tutorial/
+- https://www.youtube.com/watch?reload=9&v=POzZ0-y2ZX8&ab_channel=CodeKul
+- https://tutorialedge.net/typescript/angular/angular-socket-io-tutorial/
+- https://medium.com/factory-mind/websocket-node-js-express-step-by-step-using-typescript-725114ad5fe4
+- https://www.sitepoint.com/webrtc-video-chat-application-simplewebrtc/
+- https://www.cometchat.com/tutorials/angular-voice-video-chat
+- https://scotch.io/tutorials/build-a-video-chat-service-with-javascript-webrtc-and-okta
+- https://www.nexmo.com/blog/2020/05/08/create-a-basic-video-chat-app-with-asp-net-and-angular-dr
+- https://medium.com/@Anderson7301/building-a-video-chat-app-with-agora-and-angular-6-858d72b6fa0d
 
 *This is a list of videos, tutorials, and other content that we studied and referenced to either partially implement into our project or to just give us a deeper understanding of the frameworks and libraries that we used within our tech stack. Some of these resources were given to us from class, but the majority of them are from independent research.
 
